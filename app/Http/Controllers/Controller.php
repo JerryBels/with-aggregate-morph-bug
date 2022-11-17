@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,7 +15,7 @@ class Controller extends BaseController
 
     public function index() {
         return view('welcome',[
-            'users' => User::all()
+            'comments' => Comment::withAggregate('commentable', 'name')->get()
         ]);
     }
 }
